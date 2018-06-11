@@ -18,6 +18,11 @@ namespace ZuulCS
         {
 
         }
+
+        public bool isAlive()
+        {
+            return true;
+        }
         
     }
 }

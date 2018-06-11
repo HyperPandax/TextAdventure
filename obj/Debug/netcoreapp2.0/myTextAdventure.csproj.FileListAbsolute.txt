@@ -20,3 +20,9 @@ D:\workSpace\Project 4\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreap
 D:\workSpace\Project 4\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.runtimeconfig.dev.json
 D:\workSpace\Project 4\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.dll
 D:\workSpace\Project 4\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.pdb
+C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.csprojAssemblyReference.cache
+C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.csproj.CoreCompileInputs.cache
+C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.AssemblyInfoInputs.cache
+C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.AssemblyInfo.cs
+C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.dll
+C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.pdb

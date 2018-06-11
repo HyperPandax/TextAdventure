@@ -664,23 +664,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lisan\\.nuget\\packages\\": {},
+    "C:\\Users\\lnrei\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\workSpace\\Project 4\\myTextAdventureBroken\\myTextAdventure\\myTextAdventure.csproj",
+      "projectUniqueName": "C:\\workSpace\\myTextAdventureBroken\\myTextAdventure\\myTextAdventure.csproj",
       "projectName": "myTextAdventure",
-      "projectPath": "D:\\workSpace\\Project 4\\myTextAdventureBroken\\myTextAdventure\\myTextAdventure.csproj",
-      "packagesPath": "C:\\Users\\lisan\\.nuget\\packages\\",
-      "outputPath": "D:\\workSpace\\Project 4\\myTextAdventureBroken\\myTextAdventure\\obj\\",
+      "projectPath": "C:\\workSpace\\myTextAdventureBroken\\myTextAdventure\\myTextAdventure.csproj",
+      "packagesPath": "C:\\Users\\lnrei\\.nuget\\packages\\",
+      "outputPath": "C:\\workSpace\\myTextAdventureBroken\\myTextAdventure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\lisan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lnrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
