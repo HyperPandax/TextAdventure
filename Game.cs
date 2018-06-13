@@ -6,17 +6,19 @@ namespace ZuulCS
 	{
 		private Parser parser;
         private Player player;
+        private bool finished;
 
-		public Game ()
+        public Game ()
 		{
             player = new Player();
 			createRooms();
 			parser = new Parser();
 		}
 
+
 		private void createRooms()
 		{
-			Room outside, theatre, pub, lab, office, dungeon;
+			Room outside, theatre, pub, lab, office, dungeon, flowergarden;
 
 			// create the rooms
 			outside = new Room("outside the main entrance of the university");
@@ -24,14 +26,18 @@ namespace ZuulCS
 			pub = new Room("in the campus pub");
 			lab = new Room("in a computing lab");
 			office = new Room("in the computing admin office");
-            dungeon = new Room("in a dungoen underneath the admin office. what you see is terrifying");
+            dungeon = new Room("in a dungeon underneath the admin office. what you see is terrifying");
+            flowergarden = new Room("beautifull flowers and butterflies everywhere");
 
 			// initialise room exits
 			outside.setExit("east", theatre);
 			outside.setExit("south", lab);
 			outside.setExit("west", pub);
+            outside.setExit("north", flowergarden);
 
-			theatre.setExit("west", outside);
+            flowergarden.setExit("south", outside);
+
+            theatre.setExit("west", outside);
 
 			pub.setExit("east", outside);
 
@@ -60,6 +66,14 @@ namespace ZuulCS
 			while (! finished) {
 				Command command = parser.getCommand();
 				finished = processCommand(command);
+                bool p = player.isAlive();
+                if (!p)
+                {
+                    Console.WriteLine("You're DEAD");
+
+                    finished = true;
+                    //return finished;
+                }
 			}
 			Console.WriteLine("Thank you for playing.");
 		}
@@ -154,9 +168,22 @@ namespace ZuulCS
 				Console.WriteLine("There is no door to "+direction+"!");
 			} else {
 				player.currentroom = nextRoom;
-				Console.WriteLine(player.currentroom.getLongDescription());
-			}
-		}
+                player.damage(1);
+
+                //player.getHealth;
+
+                Console.WriteLine("=============================================");
+                Console.WriteLine(player.currentroom.getLongDescription());
+                Console.WriteLine("you have: " + player.getHealth + " health");
+                
+                //bool finished = false; 
+                /*while (!finished)
+                {
+                    Command command = parser.getCommand();
+                    finished = processCommand(command);
+                }*/
+            }
+        }
 
 	}
 }

@@ -26,3 +26,8 @@ C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTex
 C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.AssemblyInfo.cs
 C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.dll
 C:\workSpace\myTextAdventureBroken\myTextAdventure\obj\Debug\netcoreapp2.0\myTextAdventure.pdb
+C:\workSpace\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.deps.json
+C:\workSpace\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.runtimeconfig.json
+C:\workSpace\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.runtimeconfig.dev.json
+C:\workSpace\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.dll
+C:\workSpace\myTextAdventureBroken\myTextAdventure\bin\Debug\netcoreapp2.0\myTextAdventure.pdb
