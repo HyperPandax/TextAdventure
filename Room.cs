@@ -7,6 +7,9 @@ namespace ZuulCS
 		private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
 
+        private Inventory inventory;
+
+
 		/**
 	     * Create a room described "description". Initially, it has no exits.
 	     * "description" is something like "in a kitchen" or "in an open court
@@ -14,7 +17,8 @@ namespace ZuulCS
 	     */
 		public Room(string description)
 		{
-			this.description = description;
+            inventory = new Inventory();
+            this.description = description;
 			exits = new Dictionary<string, Room>();
 		}
 
@@ -26,11 +30,16 @@ namespace ZuulCS
 			exits[direction] = neighbor;
 		}
 
-		/**
+        public void setItem(string name, Item item)
+        {
+           inventory.itemList.Add(name, item);
+        }
+
+        /**
 	     * Return the description of the room (the one that was defined in the
 	     * constructor).
 	     */
-		public string getShortDescription()
+        public string getShortDescription()
 		{
 			return description;
 		}
@@ -82,5 +91,15 @@ namespace ZuulCS
 			}
 
 		}
+
+        public string getItem()
+        {
+            //inventory.itemList
+            /*for(int i = inventory.itemList.Count-1;i>=0; i--)
+            {
+
+            }*/
+        }
+
 	}
 }

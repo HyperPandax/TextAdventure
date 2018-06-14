@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ZuulCS
 {
@@ -12,13 +13,18 @@ namespace ZuulCS
 		{
             player = new Player();
 			createRooms();
-			parser = new Parser();
+            parser = new Parser();
 		}
 
 
 		private void createRooms()
 		{
 			Room outside, theatre, pub, lab, office, dungeon, flowergarden;
+            Item potion, key;
+
+            //create items
+            potion = new Potion();
+            key = new Key();
 
 			// create the rooms
 			outside = new Room("outside the main entrance of the university");
@@ -49,14 +55,21 @@ namespace ZuulCS
 
             dungeon.setExit("up", office);
 
+            //set Items
+            theatre.setItem("key", key);
+
+            lab.setItem("potion", potion);
+
 	        player.currentroom = outside;  // start game outside
 		}
 
-
-		/**
-	     *  Main play routine.  Loops until end of play.
-	     */
-		public void play()
+        private Dictionary<string, Item> itemList = new Dictionary<string, Item>();
+       
+        
+            /**
+             *  Main play routine.  Loops until end of play.
+             */
+        public void play()
 		{
 			printWelcome();
 
@@ -133,7 +146,8 @@ namespace ZuulCS
 	     */
 		private void printHelp()
 		{
-			Console.WriteLine("You are lost. You are alone.");
+            Console.WriteLine("=============================================");
+            Console.WriteLine("You are lost. You are alone.");
 			Console.WriteLine("You wander around at the university.");
 			Console.WriteLine();
 			Console.WriteLine("Your command words are:");
@@ -143,7 +157,13 @@ namespace ZuulCS
         private void printLongDiscription()
         {
             string discription = player.currentroom.getLongDescription();
+            Console.WriteLine("=============================================");
             Console.WriteLine(discription);
+            Console.WriteLine("the items in this room:");
+           /* foreach (KeyValuePair<string, Item> entry in itemList)
+            {
+                Console.WriteLine(entry.Key + ": " + entry.Value.Description);
+            }*/
         }
 
 

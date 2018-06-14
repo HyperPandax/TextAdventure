@@ -6,9 +6,12 @@ namespace ZuulCS
     {
         private Room _currentRoom;
         private int _health;
+        private Inventory _inventory;
+
 
         public Player()
         {
+            _inventory = new Inventory();
             this._health = 15;
             isAlive();
 
