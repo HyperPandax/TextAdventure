@@ -18,6 +18,49 @@ namespace ZuulCS
         }
 
 
+        public void setItem(string name, Item item)
+        {
+            _inventory.itemList.Add(name, item);
+        }
+
+        public string getItemList()
+        {
+
+            string returnstring = "Items:";
+
+            // because `exits` is a Dictionary, we can't use a `for` loop
+            int commas = 0;
+            foreach (string key in _inventory.itemList.Keys)
+            {
+                if (commas != 0 && commas != _inventory.itemList.Count)
+                {
+                    returnstring += ",";
+                }
+                commas++;
+                returnstring += " " + key;
+            }
+            return returnstring;
+            //inventory.itemList
+            /*for(int i = inventory.itemList.Count-1;i>=0; i--)
+            {
+
+            }*/
+        }
+        public Item getItem(string name)
+        {
+
+            if (_inventory.itemList.ContainsKey(name))
+            {
+                return (Item)_inventory.itemList[name];
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+
         public Room currentroom
         {
             get { return _currentRoom; }

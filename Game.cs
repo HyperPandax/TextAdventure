@@ -20,11 +20,13 @@ namespace ZuulCS
 		private void createRooms()
 		{
 			Room outside, theatre, pub, lab, office, dungeon, flowergarden;
-            Item potion, key;
+            Item potion,potion2, key;
 
             //create items
             potion = new Potion();
+            potion2 = new Potion();
             key = new Key();
+            //apple = new
 
 			// create the rooms
 			outside = new Room("outside the main entrance of the university");
@@ -59,6 +61,9 @@ namespace ZuulCS
             theatre.setItem("key", key);
 
             lab.setItem("potion", potion);
+
+            player.setItem("potion2", potion2);
+
 
 	        player.currentroom = outside;  // start game outside
 		}

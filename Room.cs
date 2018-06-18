@@ -4,7 +4,8 @@ namespace ZuulCS
 {
 	public class Room
 	{
-		private string description;
+        
+        private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
 
         private Inventory inventory;
@@ -35,6 +36,7 @@ namespace ZuulCS
            inventory.itemList.Add(name, item);
         }
 
+  
         /**
 	     * Return the description of the room (the one that was defined in the
 	     * constructor).
@@ -55,7 +57,9 @@ namespace ZuulCS
 			returnstring += description;
 			returnstring += ".\n";
 			returnstring += getExitstring();
-			return returnstring;
+            returnstring += ".\n";
+            returnstring += getItemList();
+            return returnstring;
 		}
 
 		/**
@@ -92,14 +96,42 @@ namespace ZuulCS
 
 		}
 
-        public string getItem()
+        public string getItemList()
         {
+
+            string returnstring = "Items:";
+
+            // because `exits` is a Dictionary, we can't use a `for` loop
+            int commas = 0;
+            foreach (string key in inventory.itemList.Keys)
+            {
+                if (commas != 0 && commas != inventory.itemList.Count)
+                {
+                    returnstring += ",";
+                }
+                commas++;
+                returnstring += " " + key;
+            }
+            return returnstring;
             //inventory.itemList
             /*for(int i = inventory.itemList.Count-1;i>=0; i--)
             {
 
             }*/
         }
+        public Item getItem(string name)
+        {
+            
+            if (inventory.itemList.ContainsKey(name))
+            {
+                return (Item)inventory.itemList[name];
+            }
+            else
+            {
+                return null;
+            }
 
-	}
+        }
+
+    }
 }
