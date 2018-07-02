@@ -7,7 +7,7 @@ namespace ZuulCS
         private Room _currentRoom;
 
         private int _health;
-        private int _maxHealth;
+        private int numI;
 
         private Inventory _inventory;
         internal Inventory Inventory { get => _inventory; }
@@ -16,14 +16,19 @@ namespace ZuulCS
 
         public Player()
         {
+            System.Console.WriteLine("player Constructor");
+
             _inventory = new Inventory();
             this._health = 15;
-            this._maxHealth = 50;
+            numI = 0;
             isAlive();
-
-            System.Console.WriteLine("player Constructor");
         }
 
+        public int NumberOFitems
+        {
+            get { return numI;  }
+            set { numI = value;  }
+        }
         public void setItem(string name, Item item)
         {
             Console.WriteLine(name + " is added to your inventory");
@@ -36,35 +41,6 @@ namespace ZuulCS
             set { _currentRoom = value; }
         }
 
-        public int getHealth
-        {
-            get { return _health; }
-        }
-
-        public int damage(int amount)
-        {
-            this._health += -amount;
-            return this._health;
-        }
-
-        /*public int heal(int amount)
-        {
-            this._health += amount;
-            return this._health;
-        }*/
-        public void heal()
-        {
-            if (this._health < this._maxHealth)
-            {
-                this._health = this._maxHealth;
-                System.Console.WriteLine("-- Person is healed");
-            }
-            else
-            {
-                System.Console.WriteLine("-- Person already has full health");
-            }
-        }
-
         public bool isAlive()
         {
             if(_health < 1)
@@ -75,8 +51,7 @@ namespace ZuulCS
             {
                 return true;
             }
-
-            
+   
         }
         
     }

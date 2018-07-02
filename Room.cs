@@ -6,6 +6,7 @@ namespace ZuulCS
 	{
 
         private bool locked;
+        internal bool Locked { set => locked = value; get => locked; }
 
         private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
@@ -22,14 +23,7 @@ namespace ZuulCS
 
 		public Room(string description)
 		{
-            if (this.description == "a big sakura tree in the middel of a field")
-            {
-                this.locked = true;
-            }
-            else
-            {
-                this.locked = false;
-            }
+           
             inventory = new Inventory();
             this.description = description;
 			exits = new Dictionary<string, Room>();
@@ -45,11 +39,11 @@ namespace ZuulCS
             if (this.locked)
             {
                 this.locked = false;
-                System.Console.WriteLine("-- This room is now unlocked");
+                System.Console.WriteLine("-- you opened the gate towards the sakura tree");
             }
             else
             {
-                System.Console.WriteLine("-- This room was already unlocked");
+                System.Console.WriteLine("-- This gate was already unlocked");
             }
         }
 
@@ -79,12 +73,16 @@ namespace ZuulCS
 	     */
 		public string getLongDescription()
 		{
-			string returnstring = " ";
-			returnstring += description;
+			string returnstring = "";
+            returnstring += "*************************************************************";
+            returnstring += "\n";
+            returnstring += description;
 			returnstring += ".\n";
 			returnstring += getExitstring();
             returnstring += ".\n";
             returnstring += inventory.getItemList();
+            returnstring += ".\n";
+            returnstring += "*************************************************************";
             return returnstring;
 		}
 

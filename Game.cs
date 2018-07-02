@@ -7,21 +7,24 @@ namespace ZuulCS
 	{
 		private Parser parser;
         private Player player;
-       
+
+        private Room garden, violets, hibiscuses, bridge, grassfield, poppys, lotuses, flowerdome, sakura, roses;
+        private Item violet, hibiscus, poppy, lotus, rose, key;
+
+        private int maxItem;
+        
 
         public Game ()
 		{
             player = new Player();
 			createRooms();
             parser = new Parser();
+            maxItem = 2;
 		}
 
 
-		private void createRooms()
-		{
-            Room garden, violets, hibiscuses, bridge, grassfield, poppys, lotuses, flowerdome, sakura, roses;
-            Item violet, hibiscus, poppy, lotus, rose, key;
-
+        private void createRooms()
+        {
             //create items
             violet = new Flower();
             hibiscus = new Flower();
@@ -31,15 +34,16 @@ namespace ZuulCS
 
             key = new Key();
 
-			// create the rooms
-			garden = new Room("You are outside the main entrance of the Garden");
-			violets = new Room("You are in a field full of violets");
-			hibiscuses = new Room("You see hibiscus plants everywhere");
+            // create the rooms
+            garden = new Room("You are outside the main entrance of the Garden");
+            violets = new Room("You are in a field full of violets");
+            hibiscuses = new Room("You see hibiscus plants everywhere");
             sakura = new Room("You see a big sakura tree in the middel of a field");
+            sakura.Locked = true;
 
             bridge = new Room("You are on a bridge that goes over the river in the garden");
 
-			grassfield = new Room("You are in a grassfield with on some places daisy's");
+            grassfield = new Room("You are in a grassfield with on some places daisy's");
             flowerdome = new Room("You are in a dome made of roses but they are to high to reach. there is a ladder");
             poppys = new Room("");
             lotuses = new Room("You see a small lake full of lotuses");
@@ -52,7 +56,7 @@ namespace ZuulCS
             garden.setExit("east", violets);
             garden.setExit("south", bridge);
             garden.setExit("west", hibiscuses);
-            
+
             violets.setExit("west", garden);
             hibiscuses.setExit("east", garden);
             sakura.setExit("south", garden);
@@ -79,16 +83,14 @@ namespace ZuulCS
             poppys.Inventory.addItem("poppy", poppy);
             lotuses.Inventory.addItem("lotus", lotus);
 
-            //if all flowers are in player inventory
-           // garden.Inventory.addItem("key", key);
-
             player.currentroom = garden;  // start game outside
-		}
-     
-        /*
-        Main play routine.  Loops until end of play.
-        */
-        public void play()
+        }
+
+
+    /*
+    Main play routine.  Loops until end of play.
+    */
+    public void play()
 		{
 			printWelcome();
 
@@ -115,12 +117,17 @@ namespace ZuulCS
 		private void printWelcome()
 		{
 			Console.WriteLine();
-			Console.WriteLine("Welcome to Flower Garden!");
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine("*************************************************************");
+            Console.WriteLine("              Welcome to Flower Garden!");
 			Console.WriteLine("Flower Garden is a cute and happy flower collecting game");
             Console.WriteLine("Something terible happend. the sakura tree won't bloom");
 			Console.WriteLine("Type 'help' if you need help.");
-			Console.WriteLine();
-			Console.WriteLine(player.currentroom.getLongDescription());
+			Console.WriteLine("*************************************************************");
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine("\n");
+            Console.WriteLine();
+            Console.WriteLine(player.currentroom.getLongDescription());
 		}
 
 		/*
@@ -168,19 +175,23 @@ namespace ZuulCS
 	    */
 		private void printHelp()
 		{
-            Console.WriteLine("=============================================");
+            Console.WriteLine("*************************************************************");
             Console.WriteLine("You trying to make the sakura tree bloom ");
             Console.WriteLine("Go collect all flower and put them underneath the sakura tree");
             Console.WriteLine();
 			Console.WriteLine("Your command words are:");
 			parser.showCommands();
-		}
+            Console.WriteLine("*************************************************************");
+            Console.WriteLine("\n");
+        }
 
         private void printLongDiscription()
         {
+            Console.WriteLine("*************************************************************");
             string discription = player.currentroom.getLongDescription();
-            Console.WriteLine("=============================================");
             Console.WriteLine(discription);
+            Console.WriteLine("*************************************************************");
+            Console.WriteLine("\n");
         }
 
         private void pickupItem(Command command)
@@ -189,6 +200,7 @@ namespace ZuulCS
             {
                 // if there is no second word, we don't know where to go...
                 Console.WriteLine("Pick up what?");
+                Console.WriteLine("\n");
                 return;
             }
 
@@ -200,15 +212,30 @@ namespace ZuulCS
 
             if (flowerr == null)
             {
-                Console.WriteLine("There is no  flower with the name: " + flowerr + " here!");
+                Console.WriteLine("*************************************************************");
+                Console.WriteLine("There is no  flower with the name: " + nameFlower + " here!");
+                Console.WriteLine("*************************************************************");
+                Console.WriteLine("\n");
             }
             else
             {
                 //Flower Flower = player.currentroom.Inventory.remove("flower", flowerr);
                 player.currentroom.Inventory.remove(nameFlower, flowerr);
                 player.setItem(nameFlower, flowerr);
-                Console.WriteLine("=============================================");
-                Console.WriteLine(player.Inventory.getItemList());
+                player.NumberOFitems += 1;
+                
+                Console.WriteLine("you have in you inventory: " + player.Inventory.getItemList());
+                //Console.WriteLine(player.NumberOFitems);
+                Console.WriteLine("*************************************************************" + "\n");
+
+
+                //if all flowers are in player inventory
+                if (player.NumberOFitems == maxItem)
+                {
+                    garden.Inventory.addItem("key", key);
+                    Console.WriteLine("a key apeared in the begin of the garden");
+                }
+
             }
 
         }
@@ -220,10 +247,13 @@ namespace ZuulCS
 	     */
 		private void goRoom(Command command)
 		{
+
 			if(!command.hasSecondWord()) {
-				// if there is no second word, we don't know where to go...
-				Console.WriteLine("Go where?");
-				return;
+                // if there is no second word, we don't know where to go...
+               
+                Console.WriteLine("Go where?");
+                Console.WriteLine("*************************************************************");
+                return;
 			}
 
 			string direction = command.getSecondWord();
@@ -231,18 +261,37 @@ namespace ZuulCS
 			// Try to leave current room.
 			Room nextRoom = player.currentroom.getExit(direction);
 
-			if (nextRoom == null) {
-				Console.WriteLine("There is no way to "+direction+"!");
-			} else {
-				player.currentroom = nextRoom;
-                //player.damage(1);
+            if (nextRoom == null) {
 
-                Console.WriteLine("=============================================");
-                Console.WriteLine(player.currentroom.getLongDescription());
-                //Console.WriteLine("you have: " + player.getHealth + " health");
-                
+                Console.WriteLine("There is no way to " + direction + "!");
+                Console.WriteLine("*************************************************************");
+            } else {
+
+                if (nextRoom.Locked == true)
+                {
+                    //use key
+                    if (player.NumberOFitems > maxItem) { 
+
+                        key.use(nextRoom);
+                        player.currentroom = nextRoom;
+                        Console.WriteLine(player.currentroom.getLongDescription());
+                        
+                    }
+                    //no key
+                    else
+                    {
+                        Console.WriteLine("*************************************************************");
+                        Console.WriteLine("this room is locked");
+                        Console.WriteLine("u don't have a key");
+                        Console.WriteLine("*************************************************************");
+                    }
+                }else
+                {
+                    player.currentroom = nextRoom;
+                    Console.WriteLine(player.currentroom.getLongDescription());
+                    
+                }
             }
         }
-
 	}
 }

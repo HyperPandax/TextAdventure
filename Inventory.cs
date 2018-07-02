@@ -7,17 +7,15 @@ namespace ZuulCS
 
     public class Inventory
     {
-        
-
         private Dictionary<string, Item> itemList;
-       // private Item key;
+        
+        // private Item key;
 
-	    public Inventory()
+        public Inventory()
 	    {
             Console.WriteLine("*constructor Inventory*");
 
             itemList = new Dictionary<string, Item>();
-
         }
 
         public void addItem(string tag, Item item)
@@ -40,12 +38,11 @@ namespace ZuulCS
             {
                 return null;
             }
-
         }
 
         public string  getItemList()
         {
-            string returnstring = "Flower:";
+            string returnstring = "";
 
             // because `ItemList` is a Dictionary, we can't use a `for` loop
             int commas = 0;
@@ -60,9 +57,5 @@ namespace ZuulCS
             }
             return returnstring;
         }
-        
-
-
-
     }
 }
