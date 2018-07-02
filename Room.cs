@@ -35,6 +35,11 @@ namespace ZuulCS
 			exits = new Dictionary<string, Room>();
 		}
 
+        public void removeItem(string name, Item item)
+        {
+            Inventory.remove(name, item);
+        }
+
         public void unlock()
         {
             if (this.locked)

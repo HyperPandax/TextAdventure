@@ -151,6 +151,9 @@ namespace ZuulCS
                 case "look":
                     printLongDiscription();
                     break;
+                case "pickup":
+                    pickupItem(command);
+                    break;
 			}
 
 			return wantToQuit;
@@ -178,11 +181,36 @@ namespace ZuulCS
             string discription = player.currentroom.getLongDescription();
             Console.WriteLine("=============================================");
             Console.WriteLine(discription);
-            Console.WriteLine("the Flower in this room:");
-           /* foreach (KeyValuePair<string, Item> entry in itemList)
+        }
+
+        private void pickupItem(Command command)
+        {
+            if (!command.hasSecondWord())
             {
-                Console.WriteLine(entry.Key + ": " + entry.Value.Description);
-            }*/
+                // if there is no second word, we don't know where to go...
+                Console.WriteLine("Pick up what?");
+                return;
+            }
+
+            string nameFlower = command.getSecondWord();
+            //Console.WriteLine(miep); //outcome = good flower name
+
+            Item flowerr = player.currentroom.Inventory.getItem(nameFlower);
+            
+
+            if (flowerr == null)
+            {
+                Console.WriteLine("There is no  flower with the name: " + flowerr + " here!");
+            }
+            else
+            {
+                //Flower Flower = player.currentroom.Inventory.remove("flower", flowerr);
+                player.currentroom.Inventory.remove(nameFlower, flowerr);
+                player.setItem(nameFlower, flowerr);
+                Console.WriteLine("=============================================");
+                Console.WriteLine(player.Inventory.getItemList());
+            }
+
         }
 
 

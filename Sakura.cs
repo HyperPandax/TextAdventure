@@ -3,7 +3,7 @@
 
 namespace ZuulCS
 {
-    public class Sakura:Item
+    public class Sakura
     {
         public Sakura()
         {

@@ -10,6 +10,8 @@ namespace ZuulCS
         private int _maxHealth;
 
         private Inventory _inventory;
+        internal Inventory Inventory { get => _inventory; }
+        internal Inventory Innventory { set =>  _inventory = value; }
 
 
         public Player()
@@ -24,6 +26,7 @@ namespace ZuulCS
 
         public void setItem(string name, Item item)
         {
+            Console.WriteLine(name + " is added to your inventory");
             _inventory.addItem(name, item);
         }
 

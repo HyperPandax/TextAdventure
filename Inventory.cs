@@ -24,6 +24,10 @@ namespace ZuulCS
         {
             this.itemList.Add(tag,item);
         }
+        public void remove(string tag, Item item)
+        {
+            this.itemList.Remove(tag, out item);
+        }
 
         public Item getItem(string name)
         {
@@ -41,7 +45,7 @@ namespace ZuulCS
 
         public string  getItemList()
         {
-            string returnstring = "Items:";
+            string returnstring = "Flower:";
 
             // because `ItemList` is a Dictionary, we can't use a `for` loop
             int commas = 0;
