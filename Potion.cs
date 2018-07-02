@@ -17,7 +17,21 @@ namespace ZuulCS
 
         public override void use(object o)
         {
+            if (o.GetType() == typeof(Player))
+            {
+                Player p = (Player)o; // must cast
+                p.heal();
+            }
+            else
+            {
+                // Object o is not a Person
+                System.Console.WriteLine("Can't use a Potion on this Object");
+            }
+        }
 
+        public override void use()
+        {
+            System.Console.WriteLine("Potion::use()");
         }
     }
 }

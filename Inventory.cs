@@ -7,9 +7,9 @@ namespace ZuulCS
 
     public class Inventory
     {
-        private int maxWeight;
+        
 
-        public Dictionary<string, Item> itemList;
+        private Dictionary<string, Item> itemList;
        // private Item key;
 
 	    public Inventory()
@@ -17,18 +17,46 @@ namespace ZuulCS
             Console.WriteLine("*constructor Inventory*");
 
             itemList = new Dictionary<string, Item>();
-            /*//key = new Item();
-            //key.Description = "a key";
-            //itemList["key"] = key;
-
-            foreach(KeyValuePair<string,Item> entry in itemList)
-            {
-                Console.WriteLine(entry.Key + ": " + entry.Value.Description);
-            }*/
 
         }
 
+        public void addItem(string tag, Item item)
+        {
+            this.itemList.Add(tag,item);
+        }
 
+        public Item getItem(string name)
+        {
+
+            if (itemList.ContainsKey(name))
+            {
+                return (Item)itemList[name];
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public string  getItemList()
+        {
+            string returnstring = "Items:";
+
+            // because `ItemList` is a Dictionary, we can't use a `for` loop
+            int commas = 0;
+            foreach (string key in itemList.Keys)
+            {
+                if (commas != 0 && commas != itemList.Count)
+                {
+                    returnstring += ",";
+                }
+                commas++;
+                returnstring += " " + key;
+            }
+            return returnstring;
+        }
+        
 
 
 

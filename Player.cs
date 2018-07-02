@@ -5,7 +5,10 @@ namespace ZuulCS
     public class Player
     {
         private Room _currentRoom;
+
         private int _health;
+        private int _maxHealth;
+
         private Inventory _inventory;
 
 
@@ -13,53 +16,16 @@ namespace ZuulCS
         {
             _inventory = new Inventory();
             this._health = 15;
+            this._maxHealth = 50;
             isAlive();
 
+            System.Console.WriteLine("player Constructor");
         }
-
 
         public void setItem(string name, Item item)
         {
-            _inventory.itemList.Add(name, item);
+            _inventory.addItem(name, item);
         }
-
-        public string getItemList()
-        {
-
-            string returnstring = "Items:";
-
-            // because `exits` is a Dictionary, we can't use a `for` loop
-            int commas = 0;
-            foreach (string key in _inventory.itemList.Keys)
-            {
-                if (commas != 0 && commas != _inventory.itemList.Count)
-                {
-                    returnstring += ",";
-                }
-                commas++;
-                returnstring += " " + key;
-            }
-            return returnstring;
-            //inventory.itemList
-            /*for(int i = inventory.itemList.Count-1;i>=0; i--)
-            {
-
-            }*/
-        }
-        public Item getItem(string name)
-        {
-
-            if (_inventory.itemList.ContainsKey(name))
-            {
-                return (Item)_inventory.itemList[name];
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
 
         public Room currentroom
         {
@@ -78,10 +44,22 @@ namespace ZuulCS
             return this._health;
         }
 
-        public int heal(int amount)
+        /*public int heal(int amount)
         {
             this._health += amount;
             return this._health;
+        }*/
+        public void heal()
+        {
+            if (this._health < this._maxHealth)
+            {
+                this._health = this._maxHealth;
+                System.Console.WriteLine("-- Person is healed");
+            }
+            else
+            {
+                System.Console.WriteLine("-- Person already has full health");
+            }
         }
 
         public bool isAlive()

@@ -9,7 +9,6 @@ namespace ZuulCS
     {
         protected string _name;
         protected string _description;
-        protected string _use;
         protected int _weight;
         
 
@@ -18,22 +17,25 @@ namespace ZuulCS
         public Item()
         {
             Console.WriteLine("*constructor Item*");
-
-            _weight = 0;
+            _description = "A generic Item";
+           
         }
 
         public String Description
         {
-            get { return _description; }
-            set { _description = value; }
+            get { return this._description; }
+            set { this._description = value; }
         }
 
         public virtual void use(object o)
         {
-
+            System.Console.WriteLine("Item::use(Object o)");
         }
 
-
+        public virtual void use()
+        {
+            System.Console.WriteLine("Item::use()");
+        }
 
     }
 }

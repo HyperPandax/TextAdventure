@@ -7,7 +7,7 @@ namespace ZuulCS
 	{
 		private Parser parser;
         private Player player;
-        private bool finished;
+       
 
         public Game ()
 		{
@@ -19,61 +19,75 @@ namespace ZuulCS
 
 		private void createRooms()
 		{
-			Room outside, theatre, pub, lab, office, dungeon, flowergarden;
-            Item potion,potion2, key;
+            Room garden, violets, hibiscuses, bridge, grassfield, poppys, lotuses, flowerdome, sakura, roses;
+            Item violet, hibiscus, poppy, lotus, rose, key;
 
             //create items
-            potion = new Potion();
-            potion2 = new Potion();
+            violet = new Flower();
+            hibiscus = new Flower();
+            poppy = new Flower();
+            lotus = new Flower();
+            rose = new Flower();
+
             key = new Key();
-            //apple = new
 
 			// create the rooms
-			outside = new Room("outside the main entrance of the university");
-			theatre = new Room("in a lecture theatre");
-			pub = new Room("in the campus pub");
-			lab = new Room("in a computing lab");
-			office = new Room("in the computing admin office");
-            dungeon = new Room("in a dungeon underneath the admin office. what you see is terrifying");
-            flowergarden = new Room("beautifull flowers and butterflies everywhere");
+			garden = new Room("You are outside the main entrance of the Garden");
+			violets = new Room("You are in a field full of violets");
+			hibiscuses = new Room("You see hibiscus plants everywhere");
+            sakura = new Room("You see a big sakura tree in the middel of a field");
 
-			// initialise room exits
-			outside.setExit("east", theatre);
-			outside.setExit("south", lab);
-			outside.setExit("west", pub);
-            outside.setExit("north", flowergarden);
+            bridge = new Room("You are on a bridge that goes over the river in the garden");
 
-            flowergarden.setExit("south", outside);
+			grassfield = new Room("You are in a grassfield with on some places daisy's");
+            flowerdome = new Room("You are in a dome made of roses but they are to high to reach. there is a ladder");
+            poppys = new Room("");
+            lotuses = new Room("You see a small lake full of lotuses");
 
-            theatre.setExit("west", outside);
+            roses = new Room("You are this high up and see a lot of roses");
 
-			pub.setExit("east", outside);
 
-			lab.setExit("north", outside);
-			lab.setExit("east", office);
+            // initialise room exits
+            garden.setExit("north", sakura);
+            garden.setExit("east", violets);
+            garden.setExit("south", bridge);
+            garden.setExit("west", hibiscuses);
+            
+            violets.setExit("west", garden);
+            hibiscuses.setExit("east", garden);
+            sakura.setExit("south", garden);
 
-			office.setExit("west", lab);
-            office.setExit("down", dungeon);
+            bridge.setExit("north", garden);
+            bridge.setExit("south", grassfield);
 
-            dungeon.setExit("up", office);
+            grassfield.setExit("north", bridge);
+            grassfield.setExit("east", flowerdome);
+            grassfield.setExit("south", lotuses);
+            grassfield.setExit("west", poppys);
+
+            flowerdome.setExit("west", grassfield);
+            poppys.setExit("east", grassfield);
+            lotuses.setExit("north", grassfield);
+
+            flowerdome.setExit("up", roses);
+            roses.setExit("down", flowerdome);
 
             //set Items
-            theatre.setItem("key", key);
+            hibiscuses.Inventory.addItem("hibiscus", hibiscus);
+            violets.Inventory.addItem("violet", violet);
+            roses.Inventory.addItem("rose", rose);
+            poppys.Inventory.addItem("poppy", poppy);
+            lotuses.Inventory.addItem("lotus", lotus);
 
-            lab.setItem("potion", potion);
+            //if all flowers are in player inventory
+           // garden.Inventory.addItem("key", key);
 
-            player.setItem("potion2", potion2);
-
-
-	        player.currentroom = outside;  // start game outside
+            player.currentroom = garden;  // start game outside
 		}
-
-        private Dictionary<string, Item> itemList = new Dictionary<string, Item>();
-       
-        
-            /**
-             *  Main play routine.  Loops until end of play.
-             */
+     
+        /*
+        Main play routine.  Loops until end of play.
+        */
         public void play()
 		{
 			printWelcome();
@@ -90,30 +104,30 @@ namespace ZuulCS
                     Console.WriteLine("You're DEAD");
 
                     finished = true;
-                    //return finished;
                 }
 			}
 			Console.WriteLine("Thank you for playing.");
 		}
 
-		/**
-	     * Print out the opening message for the player.
-	     */
+		/*
+	    Print out the opening message for the player.
+	    */
 		private void printWelcome()
 		{
 			Console.WriteLine();
-			Console.WriteLine("Welcome to Zuul!");
-			Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
+			Console.WriteLine("Welcome to Flower Garden!");
+			Console.WriteLine("Flower Garden is a cute and happy flower collecting game");
+            Console.WriteLine("Something terible happend. the sakura tree won't bloom");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
 			Console.WriteLine(player.currentroom.getLongDescription());
 		}
 
-		/**
-	     * Given a command, process (that is: execute) the command.
-	     * If this command ends the game, true is returned, otherwise false is
-	     * returned.
-	     */
+		/*
+	    Given a command, process (that is: execute) the command.
+	    If this command ends the game, true is returned, otherwise false is
+	    returned.
+	    */
 		private bool processCommand(Command command)
 		{
 			bool wantToQuit = false;
@@ -144,17 +158,17 @@ namespace ZuulCS
 
 		// implementations of user commands:
 
-		/**
-	     * Print out some help information.
-	     * Here we print some stupid, cryptic message and a list of the
-	     * command words.
-	     */
+		/*
+	    Print out some help information.
+	    Here we print some stupid, cryptic message and a list of the
+	    command words.
+	    */
 		private void printHelp()
 		{
             Console.WriteLine("=============================================");
-            Console.WriteLine("You are lost. You are alone.");
-			Console.WriteLine("You wander around at the university.");
-			Console.WriteLine();
+            Console.WriteLine("You trying to make the sakura tree bloom ");
+            Console.WriteLine("Go collect all flower and put them underneath the sakura tree");
+            Console.WriteLine();
 			Console.WriteLine("Your command words are:");
 			parser.showCommands();
 		}
@@ -164,7 +178,7 @@ namespace ZuulCS
             string discription = player.currentroom.getLongDescription();
             Console.WriteLine("=============================================");
             Console.WriteLine(discription);
-            Console.WriteLine("the items in this room:");
+            Console.WriteLine("the Flower in this room:");
            /* foreach (KeyValuePair<string, Item> entry in itemList)
             {
                 Console.WriteLine(entry.Key + ": " + entry.Value.Description);
@@ -190,23 +204,15 @@ namespace ZuulCS
 			Room nextRoom = player.currentroom.getExit(direction);
 
 			if (nextRoom == null) {
-				Console.WriteLine("There is no door to "+direction+"!");
+				Console.WriteLine("There is no way to "+direction+"!");
 			} else {
 				player.currentroom = nextRoom;
-                player.damage(1);
-
-                //player.getHealth;
+                //player.damage(1);
 
                 Console.WriteLine("=============================================");
                 Console.WriteLine(player.currentroom.getLongDescription());
-                Console.WriteLine("you have: " + player.getHealth + " health");
+                //Console.WriteLine("you have: " + player.getHealth + " health");
                 
-                //bool finished = false; 
-                /*while (!finished)
-                {
-                    Command command = parser.getCommand();
-                    finished = processCommand(command);
-                }*/
             }
         }
 

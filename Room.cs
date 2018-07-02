@@ -4,38 +4,59 @@ namespace ZuulCS
 {
 	public class Room
 	{
-        
+
+        private bool locked;
+
         private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
 
         private Inventory inventory;
+        internal Inventory Inventory { get => inventory;  }
 
 
-		/**
+		/*
 	     * Create a room described "description". Initially, it has no exits.
 	     * "description" is something like "in a kitchen" or "in an open court
 	     * yard".
 	     */
+
 		public Room(string description)
 		{
+            if (this.description == "a big sakura tree in the middel of a field")
+            {
+                this.locked = true;
+            }
+            else
+            {
+                this.locked = false;
+            }
             inventory = new Inventory();
             this.description = description;
 			exits = new Dictionary<string, Room>();
 		}
 
-		/**
+        public void unlock()
+        {
+            if (this.locked)
+            {
+                this.locked = false;
+                System.Console.WriteLine("-- This room is now unlocked");
+            }
+            else
+            {
+                System.Console.WriteLine("-- This room was already unlocked");
+            }
+        }
+
+        /**
 	     * Define an exit from this room.
 	     */
-		public void setExit(string direction, Room neighbor)
+        public void setExit(string direction, Room neighbor)
 		{
 			exits[direction] = neighbor;
 		}
 
-        public void setItem(string name, Item item)
-        {
-           inventory.itemList.Add(name, item);
-        }
-
+        
   
         /**
 	     * Return the description of the room (the one that was defined in the
@@ -53,12 +74,12 @@ namespace ZuulCS
 	     */
 		public string getLongDescription()
 		{
-			string returnstring = "You are ";
+			string returnstring = " ";
 			returnstring += description;
 			returnstring += ".\n";
 			returnstring += getExitstring();
             returnstring += ".\n";
-            returnstring += getItemList();
+            returnstring += inventory.getItemList();
             return returnstring;
 		}
 
@@ -95,43 +116,6 @@ namespace ZuulCS
 			}
 
 		}
-
-        public string getItemList()
-        {
-
-            string returnstring = "Items:";
-
-            // because `exits` is a Dictionary, we can't use a `for` loop
-            int commas = 0;
-            foreach (string key in inventory.itemList.Keys)
-            {
-                if (commas != 0 && commas != inventory.itemList.Count)
-                {
-                    returnstring += ",";
-                }
-                commas++;
-                returnstring += " " + key;
-            }
-            return returnstring;
-            //inventory.itemList
-            /*for(int i = inventory.itemList.Count-1;i>=0; i--)
-            {
-
-            }*/
-        }
-        public Item getItem(string name)
-        {
-            
-            if (inventory.itemList.ContainsKey(name))
-            {
-                return (Item)inventory.itemList[name];
-            }
-            else
-            {
-                return null;
-            }
-
-        }
 
     }
 }
